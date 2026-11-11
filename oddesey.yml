@@ -1,0 +1,47 @@
+header:
+  version: 15
+
+machine: chenrycore
+distro: poky
+target: core-image-minimal
+
+repos:
+  oddesey-yocto:
+    layers:
+      meta-oddesey:
+
+  poky:
+    url: https://git.yoctoproject.org/poky
+    path: layers/poky
+    branch: scarthgap
+    layers:
+      meta:
+      meta-poky:
+
+  meta-openembedded:
+    url: https://github.com/openembedded/meta-openembedded.git
+    path: layers/meta-openembedded
+    branch: scarthgap
+    layers:
+      meta-oe:
+      meta-python:
+
+  meta-st-stm32mp:
+    url: https://github.com/STMicroelectronics/meta-st-stm32mp.git
+    path: layers/meta-st/meta-st-stm32mp
+    tag: openstlinux-6.6-yocto-scarthgap-mpu-v25.06.11
+
+  meta-st-stm32mp-addons:
+    url: https://github.com/STMicroelectronics/meta-st-stm32mp-addons.git
+    path: layers/meta-st/meta-st-stm32mp-addons
+    tag: openstlinux-6.6-yocto-scarthgap-mpu-v25.06.11
+
+local_conf_header:
+  oddesey: |
+    ACCEPT_EULA_stm32mp13-oddesey = "1"
+    # Development only: root login with no password
+    EXTRA_IMAGE_FEATURES ?= "debug-tweaks"
+    # Keep disk use low
+    INHERIT += "rm_work"
+    # Same package format as OpenSTLinux
+    PACKAGE_CLASSES = "package_ipk"
