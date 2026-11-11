@@ -1,7 +1,7 @@
 header:
   version: 15
 
-machine: chenrycore
+machine: stm32mp13-oddesey
 distro: poky
 target: core-image-minimal
 
