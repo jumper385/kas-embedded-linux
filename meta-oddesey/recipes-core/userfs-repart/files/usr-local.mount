@@ -1,0 +1,12 @@
+[Unit]
+Description=mount userfs to /usr/local
+After=systemd-repart.service
+
+[Mount]
+What=/dev/disk/by-partlabel/userfs
+Where=/usr/local
+Type=ext4
+Options=defaults
+
+[Install]
+WantedBy=local-fs.target

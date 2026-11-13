@@ -39,9 +39,13 @@ repos:
 local_conf_header:
   oddesey: |
     ACCEPT_EULA_stm32mp13-oddesey = "1"
-    # Development only: root login with no password
     EXTRA_IMAGE_FEATURES ?= "debug-tweaks"
-    # Keep disk use low
     INHERIT += "rm_work"
-    # Same package format as OpenSTLinux
     PACKAGE_CLASSES = "package_ipk"
+
+    # general configs
+    INIT_MANAGER = "systemd"
+
+    # systemd userfs-repart
+    PACKAGECONFIG:append:pn-systemd = " repart openssl"
+    IMAGE_INSTALL:append = " userfs-repart"
